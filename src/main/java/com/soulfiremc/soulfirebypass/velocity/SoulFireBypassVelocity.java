@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
-@Plugin(id = "soulfirebypass", name = "SoulFireBypass", version = BuildConstants.VERSION)
+@Plugin(id = "soulfirebypass", name = "SoulFireBypass", version = BuildConstants.VERSION, description = "Allow SoulFire to bypass online mode auth on your server.")
 public class SoulFireBypassVelocity {
 
     @Inject

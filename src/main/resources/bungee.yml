@@ -1,3 +1,4 @@
 name: SoulFireBypass
 version: ${version}
 main: com.soulfiremc.soulfirebypass.bungee.SoulFireBypassBungee
+description: Allow SoulFire to bypass online mode auth on your server.

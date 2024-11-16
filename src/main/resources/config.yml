@@ -1,0 +1,4 @@
+# This MUST be a safe and secure key.
+# It is recommended to only use alphanumeric characters and underscores.
+allowed-keys:
+  - ConfigureMe

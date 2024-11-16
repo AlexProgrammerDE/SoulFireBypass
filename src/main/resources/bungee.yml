@@ -1,0 +1,3 @@
+name: SoulFireBypass
+version: ${version}
+main: com.soulfiremc.soulfirebypass.bungee.SoulFireBypassBungee

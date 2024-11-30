@@ -2,7 +2,7 @@ package com.soulfiremc.soulfirebypass.velocity;
 
 import com.google.inject.Inject;
 import com.soulfiremc.soulfirebypass.BuildConstants;
-import com.velocitypowered.api.event.connection.ConnectionHandshakeEvent;
+import com.soulfiremc.soulfirebypass.SFBypassHelpers;
 import com.velocitypowered.api.event.connection.PreLoginEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.Subscribe;
@@ -77,6 +77,10 @@ public class SoulFireBypassVelocity {
         var serverAddressField = handshake.getClass().getDeclaredField("serverAddress");
         var serverAddress = (String) serverAddressField.get(handshake);
 
+        if (SFBypassHelpers.countOccurrences(serverAddress, SFBypassHelpers.KEY_PREFIX) > 1) {
+            return;
+        }
+
         if (isValidKey(serverAddress)) {
             logger.info("Forcing offline mode for {}", event.getUsername());
             event.setResult(PreLoginEvent.PreLoginComponentResult.forceOfflineMode());
@@ -84,6 +88,6 @@ public class SoulFireBypassVelocity {
     }
 
     private boolean isValidKey(String address) {
-        return validKeys.stream().anyMatch(k -> address.contains("SF_" + k));
+        return validKeys.stream().anyMatch(k -> address.contains(SFBypassHelpers.KEY_PREFIX + k));
     }
 }

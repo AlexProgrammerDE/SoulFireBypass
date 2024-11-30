@@ -1,5 +1,6 @@
 package com.soulfiremc.soulfirebypass.bungee;
 
+import com.soulfiremc.soulfirebypass.SFBypassHelpers;
 import lombok.SneakyThrows;
 import net.md_5.bungee.api.event.PlayerHandshakeEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -56,6 +57,10 @@ public class SoulFireBypassBungee extends Plugin implements Listener {
         field.setAccessible(true);
         String extraData = (String) field.get(event.getConnection());
 
+        if (SFBypassHelpers.countOccurrences(serverAddress, SFBypassHelpers.KEY_PREFIX) > 1) {
+            return;
+        }
+
         if (isValidKey(extraData)) {
             var logger = getLogger();
             logger.info("Forcing offline mode for " + event.getConnection().getName());
@@ -64,6 +69,6 @@ public class SoulFireBypassBungee extends Plugin implements Listener {
     }
 
     private boolean isValidKey(String address) {
-        return validKeys.stream().anyMatch(k -> address.contains("SF_" + k));
+        return validKeys.stream().anyMatch(k -> address.contains(SFBypassHelpers.KEY_PREFIX + k));
     }
 }

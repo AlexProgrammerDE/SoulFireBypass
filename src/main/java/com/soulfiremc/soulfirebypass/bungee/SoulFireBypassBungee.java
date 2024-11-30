@@ -57,7 +57,7 @@ public class SoulFireBypassBungee extends Plugin implements Listener {
         field.setAccessible(true);
         String extraData = (String) field.get(event.getConnection());
 
-        if (SFBypassHelpers.countOccurrences(serverAddress, SFBypassHelpers.KEY_PREFIX) > 1) {
+        if (SFBypassHelpers.countOccurrences(extraData, SFBypassHelpers.KEY_PREFIX) > 1) {
             return;
         }
 

@@ -49,7 +49,7 @@ public class SoulFireBypassVelocity {
             validKeys = Objects.requireNonNull(node.node("allowed-keys").getList(String.class), "allowed-keys missing")
                     .stream()
                     .filter(s -> {
-                        if (!s.equalsIgnoreCase("ConfigureMe")) {
+                        if (s.equalsIgnoreCase("ConfigureMe")) {
                             logger.warn("Please configure the allowed-keys in the config.yml");
                             return false;
                         }

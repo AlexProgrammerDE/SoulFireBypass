@@ -69,12 +69,15 @@ public class SoulFireBypassVelocity {
     public void onProxyInitialization(PreLoginEvent event) {
         // LoginInboundConnection
         var delegateField = event.getConnection().getClass().getDeclaredField("delegate");
+        delegateField.setAccessible(true);
         var delegate = delegateField.get(event.getConnection());
         // InitialInboundConnection
         var handshakeField = delegate.getClass().getDeclaredField("handshake");
+        handshakeField.setAccessible(true);
         var handshake = handshakeField.get(delegate);
         // HandshakePacket
         var serverAddressField = handshake.getClass().getDeclaredField("serverAddress");
+        serverAddressField.setAccessible(true);
         var serverAddress = (String) serverAddressField.get(handshake);
 
         if (SFBypassHelpers.countOccurrences(serverAddress, SFBypassHelpers.KEY_PREFIX) > 1) {

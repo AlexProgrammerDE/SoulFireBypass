@@ -37,7 +37,7 @@ public class SoulFireBypassBungee extends Plugin implements Listener {
         validKeys = config.getStringList("allowed-keys")
                 .stream()
                 .filter(s -> {
-                    if (!s.equalsIgnoreCase("ConfigureMe")) {
+                    if (s.equalsIgnoreCase("ConfigureMe")) {
                         logger.warning("Please configure the allowed-keys in the config.yml");
                         return false;
                     }

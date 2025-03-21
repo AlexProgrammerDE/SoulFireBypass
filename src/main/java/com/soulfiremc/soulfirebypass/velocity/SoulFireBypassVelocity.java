@@ -49,7 +49,7 @@ public class SoulFireBypassVelocity {
             validKeys = Objects.requireNonNull(node.node("allowed-keys").getList(String.class), "allowed-keys missing")
                     .stream()
                     .filter(s -> {
-                        if (!s.equalsIgnoreCase("ConfigureMe")) {
+                        if (s.equalsIgnoreCase("ConfigureMe")) {
                             logger.warn("Please configure the allowed-keys in the config.yml");
                             return false;
                         }
@@ -69,12 +69,15 @@ public class SoulFireBypassVelocity {
     public void onProxyInitialization(PreLoginEvent event) {
         // LoginInboundConnection
         var delegateField = event.getConnection().getClass().getDeclaredField("delegate");
+        delegateField.setAccessible(true);
         var delegate = delegateField.get(event.getConnection());
         // InitialInboundConnection
         var handshakeField = delegate.getClass().getDeclaredField("handshake");
+        handshakeField.setAccessible(true);
         var handshake = handshakeField.get(delegate);
         // HandshakePacket
         var serverAddressField = handshake.getClass().getDeclaredField("serverAddress");
+        serverAddressField.setAccessible(true);
         var serverAddress = (String) serverAddressField.get(handshake);
 
         if (SFBypassHelpers.countOccurrences(serverAddress, SFBypassHelpers.KEY_PREFIX) > 1) {

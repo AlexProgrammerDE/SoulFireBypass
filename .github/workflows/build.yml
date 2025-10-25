@@ -23,7 +23,7 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew build test --stacktrace
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: SoulFireBypass
           if-no-files-found: error
